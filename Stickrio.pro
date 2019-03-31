@@ -32,7 +32,8 @@ SOURCES += \
     game.cpp \
     button.cpp \
     background.cpp \
-    mymediaplayer.cpp
+    mymediaplayer.cpp \
+    buttonbuilder.cpp
 
 HEADERS += \
     stickman.h \
@@ -40,7 +41,8 @@ HEADERS += \
     game.h \
     button.h \
     background.h \
-    mymediaplayer.h
+    mymediaplayer.h \
+    buttonbuilder.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

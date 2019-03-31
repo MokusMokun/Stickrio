@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QJsonObject>
 #include <QIODevice>
+#include <QDir>
 
 Config::Config(std::string fileName):
     save_count(0)
@@ -12,7 +13,10 @@ Config::Config(std::string fileName):
     QString json_content;
     QFile file;
     file.setFileName(str);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        qDebug() << "The specified file is missing";
+        exit(1);
+    }
     json_content = file.readAll();
     file.close();
 
@@ -40,7 +44,7 @@ Config::Config(std::string fileName):
 void Config::save()
 {
     setStarting_pos(20);
-    QString filename = QString("../Stickrio/Configs/config%1.json").arg(save_count);
+    QString filename = QString("%1/config.json").arg(QDir::currentPath(), save_count);
     QFile saveFile(filename);
     saveFile.open(QFile::WriteOnly);
     QJsonObject RootObject = json_document.object();
@@ -62,7 +66,7 @@ void Config::save()
     saveFile.write(json_document.toJson());
     saveFile.close();
     save_count++;
-    qDebug() << "save file created";
+    qDebug() << "save file created in " << QDir::currentPath();
 }
 
 void Config::modify_bg(){

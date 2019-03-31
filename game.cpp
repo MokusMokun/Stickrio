@@ -1,6 +1,6 @@
 #include "game.h"
 #include <QMediaPlaylist>
-
+#include "buttonbuilder.h"
 
 Game::Game()
 {
@@ -60,10 +60,15 @@ void Game::start()
     B_player->play();
 
 
-    // Create all the buttons
-    pauseButton = new Button(QString("Pause/Resume"));
-    int pause_x = this->width()*0.5 - pauseButton->boundingRect().width()/2;
-    int pause_y = this->height()*0.1 - pauseButton->boundingRect().height()/2;
+    // Create all the buttons via the button builder
+    ButtonBuilder* buttonBuilder = new ButtonBuilder(pauseButton);
+    buttonBuilder->setWindowWidth(this->width());
+    buttonBuilder->setWindowHeight(this->height());
+
+    buttonBuilder->setName("Pause/Resume");
+    int pause_x = buttonBuilder->setXcoordinate(float(0.5));
+    int pause_y = buttonBuilder->setYcoordinate(float(0.1));
+    pauseButton = buttonBuilder->getButton();
     pauseButton->setPos(pause_x,pause_y);
     connect(pauseButton,SIGNAL(clicked()),background1,SLOT(freeze()));
     connect(pauseButton,SIGNAL(clicked()),background2,SLOT(freeze()));
@@ -71,39 +76,49 @@ void Game::start()
     connect(pauseButton,SIGNAL(clicked()),stickMan,SLOT(freeze()));
     scene->addItem(pauseButton);
 
-    exitButton = new Button(QString("Exit"));
-    int resume_x = this->width()*0.85 - exitButton->boundingRect().width()/2;
-    int resume_y = this->height()*0.1 - exitButton->boundingRect().height()/2;
+    buttonBuilder->reset(exitButton);
+    buttonBuilder->setName("Exit");
+    int resume_x = buttonBuilder->setXcoordinate(float(0.85));
+    int resume_y = buttonBuilder->setYcoordinate(float(0.1));
+    exitButton = buttonBuilder->getButton();
     exitButton->setPos(resume_x,resume_y);
     connect(exitButton,SIGNAL(clicked()),this,SLOT(close()));
     scene->addItem(exitButton);
 
-    saveButton = new Button(QString("Save"));
-    int save_x = this->width()*0.15 - saveButton->boundingRect().width()/2;
-    int save_y = this->height()*0.1 - saveButton->boundingRect().height()/2;
+    buttonBuilder->reset(saveButton);
+    buttonBuilder->setName("Save");
+    int save_x = buttonBuilder->setXcoordinate(float(0.15));
+    int save_y = buttonBuilder->setYcoordinate(float(0.1));
+    saveButton = buttonBuilder->getButton();
     saveButton->setPos(save_x,save_y);
     connect(saveButton,SIGNAL(clicked()),config,SLOT(save()));
     scene->addItem(saveButton);
 
-    sizeButton = new Button(QString("Size"));
-    int size_x = this->width()*0.15 - sizeButton->boundingRect().width()/2;
-    int size_y = this->height()*0.2 - sizeButton->boundingRect().height()/2;
+    buttonBuilder->reset(sizeButton);
+    buttonBuilder->setName("Change Size");
+    int size_x = buttonBuilder->setXcoordinate(float(0.15));
+    int size_y = buttonBuilder->setYcoordinate(float(0.2));
+    sizeButton = buttonBuilder->getButton();
     sizeButton->setPos(size_x,size_y);
     connect(sizeButton,SIGNAL(clicked()),stickMan,SLOT(sizeChange()));
     connect(sizeButton,SIGNAL(clicked()),config,SLOT(modify_size()));
     scene->addItem(sizeButton);
 
-    clothesButton = new Button(QString("Clothes"));
-    int clo_x = this->width()*0.5 - clothesButton->boundingRect().width()/2;
-    int clo_y = this->height()*0.2 - clothesButton->boundingRect().height()/2;
+    buttonBuilder->reset(clothesButton);
+    buttonBuilder->setName("Clothes");
+    int clo_x = buttonBuilder->setXcoordinate(float(0.5));
+    int clo_y = buttonBuilder->setYcoordinate(float(0.2));
+    clothesButton = buttonBuilder->getButton();
     clothesButton->setPos(clo_x,clo_y);
     connect(clothesButton,SIGNAL(clicked()),stickMan,SLOT(clothesChange()));
     connect(clothesButton,SIGNAL(clicked()),config,SLOT(modify_clothes()));
     scene->addItem(clothesButton);
 
-    bgButton = new Button(QString("Background"));
-    int back_x = this->width()*0.85 - bgButton->boundingRect().width()/2;
-    int back_y = this->height()*0.2 - bgButton->boundingRect().height()/2;
+    buttonBuilder->reset(bgButton);
+    buttonBuilder->setName("Background");
+    int back_x = buttonBuilder->setXcoordinate(float(0.85));
+    int back_y = buttonBuilder->setYcoordinate(float(0.2));
+    bgButton = buttonBuilder->getButton();
     bgButton->setPos(back_x,back_y);
     connect(bgButton,SIGNAL(clicked()),stickMan,SLOT(bgChange()));
     connect(bgButton,SIGNAL(clicked()),background1,SLOT(swap()));
@@ -115,6 +130,8 @@ void Game::start()
     scene->addItem(bgButton);
 
 }
+
+
 
 void Game::resize(){
     QString back_image_str = config->getBack_image();
