@@ -16,8 +16,8 @@ Features
 - Title screen and exit buttons
 - background music (《sans.》 by Toby Fox)
 - God's timer (Pause/Resume)
-- Mario can resize himself
+- Mario can resize himself (with cost of glinches)
 - Mario is actually walking!!!
-5. Clothes can be changed, two options for now
-6. Background can be changed, three options for now
-7. Config file I/O (different directories though)
+- Clothes can be changed, two options for now
+- Background can be changed, three options for now
+- Config file I/O (different directories though)
