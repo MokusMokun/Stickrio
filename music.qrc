@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Music/Sans.flac</file>
+        <file>Music/Nyan_cat.mp3</file>
+    </qresource>
+</RCC>

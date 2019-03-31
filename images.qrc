@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/back_1.png</file>
+        <file>Images/brick3.png</file>
+        <file>Images/mariostop.png</file>
+        <file>Images/back_2.jpg</file>
+        <file>Images/firemariostop.png</file>
+        <file>Images/back_3.jpg</file>
+        <file>Images/firemario.png</file>
+        <file>Images/mario.png</file>
+    </qresource>
+</RCC>

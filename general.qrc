@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>config.json</file>
+        <file>Music/nyan_cat.mp3</file>
+        <file>Music/sans.flac</file>
+        <file>button.cpp</file>
+        <file>button.h</file>
+        <file>config.cpp</file>
+        <file>config.h</file>
+        <file>game.cpp</file>
+        <file>game.h</file>
+        <file>main.cpp</file>
+        <file>stickman.cpp</file>
+        <file>stickman.h</file>
+    </qresource>
+</RCC>
